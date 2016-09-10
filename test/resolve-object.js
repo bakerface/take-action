@@ -21,34 +21,20 @@
  *
  */
 
-exports.bindActionsToStore = function (actions) {
-  return function (store) {
-    var bound = { };
+var should = require('should');
+var util = require('..');
 
-    for (var key in actions) {
-      if (Object.prototype.hasOwnProperty.call(actions, key)) {
-        bound[key] = actions[key](store);
-      }
-    }
+describe('resolveObject', function () {
+  it('should resolve the values', function () {
+    const input = {
+      foo: 'foo',
+      bar: Promise.resolve('bar')
+    };
 
-    return bound;
-  };
-};
-
-function pair(keys, values) {
-  const object = { };
-
-  for (var i = 0, ii = keys.length; i < ii; i++) {
-    object[keys[i]] = values[i];
-  }
-
-  return object;
-}
-
-exports.resolveObject = function (object) {
-  const keys = Object.getOwnPropertyNames(object);
-  const promises = keys.map(key => object[key]);
-
-  return Promise.all(promises)
-    .then(values => pair(keys, values));
-};
+    should(util.resolveObject(input))
+      .be.fulfilledWith({
+        foo: 'foo',
+        bar: 'bar'
+      });
+  });
+});
