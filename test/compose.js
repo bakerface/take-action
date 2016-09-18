@@ -21,20 +21,20 @@
  *
  */
 
-var should = require('should');
-var util = require('..');
+var assert = require('assert');
+var takeAction = require('..');
 
-describe('resolveObject', function () {
-  it('should resolve the values', function () {
-    const input = {
-      foo: 'foo',
-      bar: Promise.resolve('bar')
-    };
+function double(x) {
+  return x + x;
+}
 
-    should(util.resolveObject(input))
-      .be.fulfilledWith({
-        foo: 'foo',
-        bar: 'bar'
-      });
+function square(x) {
+  return x * x;
+}
+
+describe('composing functions', function () {
+  it('should invoke the right-most function first', function () {
+    var calculate = takeAction.compose(double, square, double);
+    assert.equal(calculate(5), 200);
   });
 });

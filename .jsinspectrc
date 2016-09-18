@@ -1,8 +1,0 @@
-{
-  "identifiers": true,
-  "ignore": "node_modules|coverage|test.js",
-  "jsx": true,
-  "reporter": "default",
-  "suppress": 100,
-  "threshold": 30
-}

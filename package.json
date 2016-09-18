@@ -1,43 +1,52 @@
 {
   "name": "take-action",
-  "version": "1.1.0",
-  "description": "A handful of reusable functions",
+  "version": "2.0.0",
+  "description": "Predictable micro-service architecture",
   "author": "Chris Baker <mail.chris.baker@gmail.com>",
   "license": "MIT",
+  "private": false,
   "main": "index.js",
-  "homepage": "https://github.com/bakerface/take-action#readme",
-  "keywords": [],
-  "engines": {
-    "node": ">=6.4.0",
-    "npm": ">=3.10.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:bakerface/take-action.git"
-  },
-  "bugs": {
-    "url": "https://github.com/bakerface/take-action/issues"
-  },
   "contributors": [
     {
       "name": "Chris Baker",
       "email": "mail.chris.baker@gmail.com"
     }
   ],
+  "dependencies": {},
+  "devDependencies": {
+    "codeclimate-test-reporter": "^0.3.3",
+    "mocha": "^3.0.2",
+    "nyc": "^8.3.0",
+    "xo": "^0.16.0"
+  },
+  "engines": {
+    "node": "^6.6.0",
+    "npm": "^3.10.3"
+  },
+  "nyc": {
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "statements": 100,
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bakerface/take-action.git"
+  },
   "scripts": {
-    "pretest": "xo && jsinspect",
-    "test": "istanbul cover _mocha",
-    "posttest": "istanbul check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
-    "codeclimate": "codeclimate-test-reporter < coverage/lcov.info"
+    "codeclimate": "codeclimate-test-reporter < coverage/lcov.info",
+    "test": "xo && nyc --check-coverage _mocha"
   },
   "xo": {
-    "space": true,
-    "globals": [
-      "describe",
-      "beforeEach",
-      "afterEach",
-      "it"
+    "envs": [
+      "mocha",
+      "node"
     ],
+    "space": 2,
     "rules": {
       "babel/array-bracket-spacing": [
         "error",
@@ -52,13 +61,5 @@
         "stroustrup"
       ]
     }
-  },
-  "devDependencies": {
-    "codeclimate-test-reporter": "^0.3.3",
-    "istanbul": "^0.4.5",
-    "jsinspect": "^0.8.0",
-    "mocha": "^3.0.2",
-    "should": "^11.1.0",
-    "xo": "^0.16.0"
   }
 }
