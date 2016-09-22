@@ -37,4 +37,9 @@ describe('composing functions', function () {
     var calculate = takeAction.compose(double, square, double);
     assert.equal(calculate(5), 200);
   });
+
+  it('should default to the identity function', function () {
+    var calculate = takeAction.compose();
+    assert.equal(calculate(5), 5);
+  });
 });
