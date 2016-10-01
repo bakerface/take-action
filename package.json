@@ -1,10 +1,9 @@
 {
   "name": "take-action",
-  "version": "2.0.1",
-  "description": "Predictable micro-service architecture",
+  "version": "3.0.0",
+  "description": "A fast, unopinionated, minimalist action framework for JavaScript.",
   "author": "Chris Baker <mail.chris.baker@gmail.com>",
   "license": "MIT",
-  "private": false,
   "main": "index.js",
   "contributors": [
     {
@@ -12,16 +11,11 @@
       "email": "mail.chris.baker@gmail.com"
     }
   ],
-  "dependencies": {},
   "devDependencies": {
     "codeclimate-test-reporter": "^0.3.3",
-    "mocha": "^3.0.2",
+    "mocha": "^3.1.0",
     "nyc": "^8.3.0",
     "xo": "^0.16.0"
-  },
-  "engines": {
-    "node": "^6.6.0",
-    "npm": "^3.10.3"
   },
   "nyc": {
     "branches": 100,
@@ -59,6 +53,9 @@
       "brace-style": [
         "error",
         "stroustrup"
+      ],
+      "no-extend-native": [
+        "off"
       ]
     }
   }
