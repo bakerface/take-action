@@ -111,6 +111,16 @@ function ActionTypes(validate) {
     });
   });
 
+  defineGetter(this, 'email', function () {
+    return this.string.optional(function (value) {
+      if (/^[^@]+@[^@]+$/.test(value)) {
+        return value;
+      }
+
+      throw new ActionValidateError('An email address must have a domain');
+    });
+  });
+
   defineGetter(this, 'isRequired', function () {
     return this.compose(function (value) {
       if (typeof value === 'undefined') {

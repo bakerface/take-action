@@ -300,6 +300,45 @@ describe('creating an action', function () {
     });
   });
 
+  describe('with an email', function () {
+    beforeEach(function () {
+      action.propTypes.e = Action.Types.email;
+
+      action.perform = function (jacks, props) {
+        return props.e;
+      };
+    });
+
+    describe('that is valid', function () {
+      beforeEach(function () {
+        props.e = 'john@doe.com';
+      });
+
+      it('should perform the action', function () {
+        assert.equal(perform(), 'john@doe.com');
+      });
+    });
+
+    describe('that is invalid', function () {
+      beforeEach(function () {
+        props.e = 'john';
+      });
+
+      it('should throw an ActionValidateError', function () {
+        assert.equal(error().name, 'ActionValidateError');
+      });
+
+      it('should have a message', function () {
+        assert.equal(error().message, 'The action could not be validated');
+      });
+
+      it('should have the errors', function () {
+        assert.equal(error().errors.props.e,
+          'An email address must have a domain');
+      });
+    });
+  });
+
   describe('with a number', function () {
     beforeEach(function () {
       action.propTypes.n = Action.Types.number;
