@@ -232,3 +232,26 @@ exports.create = function (action) {
     return action.perform(sanitized.jacks, sanitized.props);
   };
 };
+
+function bindActionToJacks(action, jacks) {
+  return function (props) {
+    return action(jacks, props);
+  };
+}
+
+exports.bindActionsToJacks = function (actions, jacks) {
+  var target = { };
+
+  for (var key in actions) {
+    if (Object.prototype.hasOwnProperty.call(actions, key)) {
+      if (typeof actions[key] === 'function') {
+        target[key] = bindActionToJacks(actions[key], jacks);
+      }
+      else {
+        target[key] = actions[key];
+      }
+    }
+  }
+
+  return target;
+};

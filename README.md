@@ -52,3 +52,41 @@ var props = {
 
 createUser(jacks, props);
 ```
+
+### Action.bindActionsToJacks(actions, jacks)
+Returns a new set of actions, each bound to `jacks`, accepting `props` as the only argument.
+
+``` javascript
+var Action = require('take-action');
+
+var actions = {
+  hello: function (jacks, props) {
+    jacks.lang.hello(props.name);
+  },
+
+  goodbye: function (jacks, props) {
+    jacks.lang.goodbye(props.name);
+  },
+};
+
+var jacks = {
+  lang: {
+    hello: function (name) {
+      console.log('Hello, ' + name);
+    },
+
+    goodbye: function (name) {
+      console.log('Goodbye, ' + name);
+    }
+  }
+};
+
+var Greetings = Action.bindActionsToJacks(actions, jacks);
+
+var user = {
+  name: 'John'
+};
+
+Greetings.hello(user);   // Hello, John
+Greetings.goodbye(user); // Goodbye, John
+```
