@@ -115,28 +115,28 @@ describe('creating an action', function () {
   describe('without jack types', function () {
     beforeEach(function () {
       action.jackTypes = undefined;
+
+      action.perform = function (jacks) {
+        return jacks;
+      };
     });
 
-    it('should throw an ActionCreateError', function () {
-      assert.equal(error().name, 'ActionCreateError');
-    });
-
-    it('should have a message', function () {
-      assert.equal(error().message, 'The action jack types are required');
+    it('should default to an empty object', function () {
+      assert.deepEqual(perform(), { });
     });
   });
 
   describe('without prop types', function () {
     beforeEach(function () {
       action.propTypes = undefined;
+
+      action.perform = function (jacks, props) {
+        return props;
+      };
     });
 
-    it('should throw an ActionCreateError', function () {
-      assert.equal(error().name, 'ActionCreateError');
-    });
-
-    it('should have a message', function () {
-      assert.equal(error().message, 'The action prop types are required');
+    it('should default to an empty object', function () {
+      assert.deepEqual(perform(), { });
     });
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "take-action",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "A fast, unopinionated, minimalist action framework for JavaScript.",
   "author": "Chris Baker <mail.chris.baker@gmail.com>",
   "license": "MIT",

@@ -203,22 +203,14 @@ exports.create = function (action) {
     throw new ActionCreateError('An action description is required');
   }
 
-  if (typeof action.jackTypes !== 'object') {
-    throw new ActionCreateError('The action jack types are required');
-  }
-
-  if (typeof action.propTypes !== 'object') {
-    throw new ActionCreateError('The action prop types are required');
-  }
-
   if (typeof action.perform !== 'function') {
     throw new ActionCreateError('An action perform function is required');
   }
 
   return function (jacks, props) {
     var shape = new ActionTypes().shape({
-      jacks: new ActionTypes().shape(action.jackTypes),
-      props: new ActionTypes().shape(action.propTypes)
+      jacks: new ActionTypes().shape(action.jackTypes || { }),
+      props: new ActionTypes().shape(action.propTypes || { })
     });
 
     var j = (action.getDefaultJacks) ? action.getDefaultJacks() : { };
