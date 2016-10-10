@@ -156,6 +156,16 @@ ActionTypes.prototype.typeOf = function (expected) {
   });
 };
 
+function get(object, key) {
+  var value = object[key];
+
+  if (typeof value === 'function') {
+    return value.bind(object);
+  }
+
+  return value;
+}
+
 ActionTypes.prototype.shape = function (shape) {
   return this.object.optional(function (value) {
     var sanitized = { };
@@ -165,7 +175,7 @@ ActionTypes.prototype.shape = function (shape) {
     for (var key in shape) {
       if (Object.prototype.hasOwnProperty.call(shape, key)) {
         try {
-          sanitized[key] = shape[key].validate(value[key]);
+          sanitized[key] = shape[key].validate(get(value, key));
         }
         catch (err) {
           if (err instanceof ActionValidateError) {

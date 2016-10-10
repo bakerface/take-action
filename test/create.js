@@ -423,7 +423,8 @@ describe('creating an action', function () {
     beforeEach(function () {
       action.propTypes.o = Action.Types.shape({
         s: Action.Types.string.isRequired,
-        n: Action.Types.number.isRequired
+        n: Action.Types.number.isRequired,
+        f: Action.Types.func.isRequired
       });
 
       action.perform = function (jacks, props) {
@@ -433,15 +434,26 @@ describe('creating an action', function () {
 
     describe('that is valid', function () {
       beforeEach(function () {
-        props.o = {
-          s: '',
-          n: 0
+        function Shape() {
+          this.s = '';
+          this.n = 5;
+        }
+
+        Shape.prototype.square = function (n) {
+          return n * n;
         };
+
+        Shape.prototype.f = function () {
+          return this.square(this.n);
+        };
+
+        props.o = new Shape();
       });
 
       it('should perform the action', function () {
         assert.equal(perform().s, '');
-        assert.equal(perform().n, 0);
+        assert.equal(perform().n, 5);
+        assert.equal(perform().f(), 25);
       });
     });
 
