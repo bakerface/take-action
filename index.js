@@ -205,14 +205,6 @@ exports.create = function (action) {
     throw new ActionCreateError('An action is required');
   }
 
-  if (typeof action.name !== 'string') {
-    throw new ActionCreateError('An action name is required');
-  }
-
-  if (typeof action.description !== 'string') {
-    throw new ActionCreateError('An action description is required');
-  }
-
   if (typeof action.perform !== 'function') {
     throw new ActionCreateError('An action perform function is required');
   }

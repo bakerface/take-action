@@ -55,8 +55,6 @@ describe('creating an action', function () {
 
   beforeEach(function () {
     action = {
-      name: 'CreateUser',
-      description: 'Creates a new user account',
       jackTypes: { },
       propTypes: { },
       perform: function () { }
@@ -81,34 +79,6 @@ describe('creating an action', function () {
 
     it('should have a message', function () {
       assert.equal(error().message, 'An action is required');
-    });
-  });
-
-  describe('without a name', function () {
-    beforeEach(function () {
-      action.name = undefined;
-    });
-
-    it('should throw an ActionCreateError', function () {
-      assert.equal(error().name, 'ActionCreateError');
-    });
-
-    it('should have a message', function () {
-      assert.equal(error().message, 'An action name is required');
-    });
-  });
-
-  describe('without a description', function () {
-    beforeEach(function () {
-      action.description = undefined;
-    });
-
-    it('should throw an ActionCreateError', function () {
-      assert.equal(error().name, 'ActionCreateError');
-    });
-
-    it('should have a message', function () {
-      assert.equal(error().message, 'An action description is required');
     });
   });
 
